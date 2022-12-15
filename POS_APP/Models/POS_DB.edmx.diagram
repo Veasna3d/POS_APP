@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2c27d7afa7c84325a2aef223dc0f5472" Name="Diagram1">
+        <EntityTypeShape EntityType="POS_DBModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_DBModel.Import" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_DBModel.Product" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_DBModel.Sale" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_DBModel.Supplier" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_DBModel.User" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="POS_DBModel.FK__Import__CatId__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_DBModel.FK__Import__PCode__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_DBModel.FK__Import__SupId__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_DBModel.FK__Sale__PCode__31EC6D26" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
