@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POS_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CatId" />
+    </Key>
+    <Property Name="CatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Imports" Relationship="Self.FK__Import__CatId__2E1BDC42" FromRole="Category" ToRole="Import" />
+  </EntityType>
+  <EntityType Name="Import">
+    <Key>
+      <PropertyRef Name="ImportID" />
+    </Key>
+    <Property Name="ImportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImportDate" Type="DateTime" Precision="0" />
+    <Property Name="PCode" Type="Int32" />
+    <Property Name="CatId" Type="Int32" />
+    <Property Name="SupId" Type="Int32" />
+    <Property Name="ImportQTY" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Import__CatId__2E1BDC42" FromRole="Import" ToRole="Category" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Import__PCode__2D27B809" FromRole="Import" ToRole="Product" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Import__SupId__2F10007B" FromRole="Import" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="PCode" />
+    </Key>
+    <Property Name="PCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Imports" Relationship="Self.FK__Import__PCode__2D27B809" FromRole="Product" ToRole="Import" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sale__PCode__31EC6D26" FromRole="Product" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SaleDate" Type="DateTime" Precision="0" />
+    <Property Name="PCode" Type="Int32" />
+    <Property Name="SaleQty" Type="Int32" />
+    <Property Name="SalePrice" Type="Double" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Sale__PCode__31EC6D26" FromRole="Sale" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupId" />
+    </Key>
+    <Property Name="SupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Imports" Relationship="Self.FK__Import__SupId__2F10007B" FromRole="Supplier" ToRole="Import" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Import__CatId__2E1BDC42">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Import" Type="Self.Import" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CatId" />
+      </Principal>
+      <Dependent Role="Import">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Import__PCode__2D27B809">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Import" Type="Self.Import" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="PCode" />
+      </Principal>
+      <Dependent Role="Import">
+        <PropertyRef Name="PCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Import__SupId__2F10007B">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Import" Type="Self.Import" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupId" />
+      </Principal>
+      <Dependent Role="Import">
+        <PropertyRef Name="SupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sale__PCode__31EC6D26">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="PCode" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="PCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POS_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Imports" EntityType="Self.Import" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Sales" EntityType="Self.Sale" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Import__CatId__2E1BDC42" Association="Self.FK__Import__CatId__2E1BDC42">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Import" EntitySet="Imports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Import__PCode__2D27B809" Association="Self.FK__Import__PCode__2D27B809">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Import" EntitySet="Imports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Import__SupId__2F10007B" Association="Self.FK__Import__SupId__2F10007B">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Import" EntitySet="Imports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sale__PCode__31EC6D26" Association="Self.FK__Sale__PCode__31EC6D26">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Sale" EntitySet="Sales" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

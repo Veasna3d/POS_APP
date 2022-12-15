@@ -89,11 +89,10 @@ namespace POS_APP.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var userType = 1;
+           
             var result = db.Users.Where(m => m.Username == user.Username && m.Password == user.Password).FirstOrDefault();
             if (result != null)
             {
-                var type = db.Users.Where(t => t.Type == userType).FirstOrDefault();
 
                 Session["user"] = result;
                 return RedirectToAction("Index", "Home");

@@ -18,6 +18,7 @@ namespace POS_APP.Models
         public POS_DBEntities()
             : base("name=POS_DBEntities")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
