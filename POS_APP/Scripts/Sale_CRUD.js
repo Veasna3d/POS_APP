@@ -22,7 +22,7 @@ function DisplayData(search) {
                 str += '<a target="_blank" href="' + data[i].Picture + '">'
                 str += '<img src="../Images/' + data[i].Picture + '">';
                 str += '</a>';
-                str += '<div class="desc">PName:' + data[i].PName + '<br>Price:' + data[i].Price;
+                str += '<div class="desc">Product : ' + data[i].PName + '<br>Price : ' + data[i].Price;
                 str += '<br><input type="button" class="btn btn-primary" value="Buy Now" onclick="buyNow(' +
                     data[i].PCode + ',\'' + data[i].PName + '\',' + data[i].Price + ');" /></div>';
                 str += '</div>';
@@ -41,7 +41,7 @@ function display() {
     var total = 0;
     var amount = 0;
     var str = "<table class='table'>";
-    str += "<tr><th></th><th>PCode</th><th>PName</th><th>SalePrice</th><th>SaleQTY</th><th>Amount</th></tr>";
+    str += "<tr><th></th><th>No</th><th>Product</th><th>Price</th><th>QTY</th><th>Amount</th></tr>";
     for (var index in arr) {
         amount = arr[index].SaleQTY * arr[index].SalePrice;
         total += amount;
@@ -88,6 +88,7 @@ function myDelete(index) {
 }
 /*-- SaleProduct Function --*/
 function SaleProduct(index) {
+    
     if (confirm("Do you want to Save All?")) {
         //sent to Server(C#)
         $.ajax({
@@ -106,7 +107,10 @@ function SaleProduct(index) {
                 setTimeout(function () { $('#myModal').modal('hide'); }, 1000);
             },
             error: function (e) {
-                console.log(e.responseText);
+                noty({
+                    text: data, type: 'error', dismissQueue: true, layout: 'topCenter', theme: 'relax', timeout:
+                        1000
+                });
             }
         });
 

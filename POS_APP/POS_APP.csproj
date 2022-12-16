@@ -2313,6 +2313,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Imports\Index.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
+    <Content Include="Views\Suppliers\Sup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,6 +17,10 @@ namespace POS_APP.Controllers
         {
             return View();
         }
+        public ActionResult Sup()
+        {
+            return View();
+        }
         //GetAllData
         public JsonResult GetAllData()
         {
@@ -25,7 +29,7 @@ namespace POS_APP.Controllers
         //Insert
         public JsonResult Create(Supplier supplier)
         {
-            db.Suppliers.Add(supplier); ;
+            db.Suppliers.Add(supplier);
             db.SaveChanges();
             return new JsonResult { Data = "Insert Success", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
