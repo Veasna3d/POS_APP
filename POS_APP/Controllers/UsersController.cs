@@ -17,6 +17,10 @@ namespace POS_APP.Controllers
         {
             return View();
         }
+        public ActionResult UserList()
+        {
+            return View();
+        }
         //GetAllData
         public JsonResult GetAllData()
         {

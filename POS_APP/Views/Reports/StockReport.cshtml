@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "StockReport";
+}
+
+<div class="content-wrapper">
+    <div class="content mt-5 pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <h5>Remain Report</h5>
+                        </div>
+                        <div class="m-2">
+
+                        </div>
+                        <div class="card-body">
+                            <!---- div_print ---->
+                            <div id="div_print">
+                                <div id="display">content .......</div>
+                                <h1>&nbsp;</h1>
+
+                            </div>
+                            <!---- end div_print ---->
+                            <br />
+                            <button type="button" style="width:150px;" id="btnprint" class="btn btn-success"
+                                    onclick="PrintReport();">
+                                Print
+                            </button>
+                            @section Scripts{
+                                @Scripts.Render("~/bundles/jqueryval")
+                                <script>
+                                    //document loaded
+                                    $(document).ready(function () {
+                                        LoadData();
+                                    });
+                                    function LoadData() {
+                                        $.ajax({
+                                            url: '/Reports/RemainByQTY',
+                                            type: 'GET',
+                                            dataType: 'json',
+                                            success: function (data) {
+                                                var total_import = 0;
+                                                var total_sale = 0;
+                                                var total_remain = 0;
+                                                var str = "<table class='table'>";
+                                                str +=
+                                                    "<tr><th>N<sup>o</sup></th><th>Product</th><th>Import</th><th>Sale Out</th><th>Remain</th></tr>";
+                                                for (var i in data) {
+                                                    total_import += data[i].Import;
+                                                    total_sale += data[i].SaleOut;
+                                                    total_remain += data[i].Remain;
+                                                    str += "<tr><td>" + (Number(i) + 1) + "</td><td>" + data[i].PName + "</td><td>" +
+                                                        data[i].Import + "</td><td>" + data[i].SaleOut + "</td><td>" + data[i].Remain + "</td></tr>";
+                                                }
+                                                str += "<tr><th colspan='2'>Grand Total</th><th>" + total_import + "</th><th>" + total_sale +
+                                                    "</th><th>" + total_remain + "</th></tr>";
+                                                str += "</table>";
+                                                $('#display').html(str);
+                                            },
+                                            error: function (e) {
+                                                console.log(e.responseText);
+                                            }
+                                        });
+                                    }
+                                </script>
+                            }
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

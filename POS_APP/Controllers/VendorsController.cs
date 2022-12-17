@@ -8,16 +8,10 @@ using POS_APP.Models;
 
 namespace POS_APP.Controllers
 {
-    public class SuppliersController : Controller
+    public class VendorsController : Controller
     {
-        // GET: Suppliers
-
         private POS_DBEntities db = new POS_DBEntities();
         public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Sup()
         {
             return View();
         }
@@ -55,6 +49,5 @@ namespace POS_APP.Controllers
             db.SaveChanges();
             return new JsonResult { Data = "Delete Success", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-
     }
 }

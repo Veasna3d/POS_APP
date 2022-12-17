@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="@Url.Action("Index", "Home")" class="brand-link">
         <img src="~/Assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">SMS</span>
+        <span class="brand-text font-weight-light">POS</span>
     </a>
    
     <!-- Sidebar -->
@@ -17,7 +17,7 @@
                 <li class="nav-header">REPORTS</li>
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Home")" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="nav-icon fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
@@ -25,60 +25,26 @@
                 <li class="nav-header">MANAGE</li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-folder-open"></i>
+                    <a href="@Url.Action("Index", "Sales")" class="nav-link">
+                        <i class="nav-icon fas fa-store"></i>
                         <p>
-                            User
-                            <i class="right fas fa-angle-left"></i>
+                            POS
+                           
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Users")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>User</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("UserList", "Users")" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            User Management
+                        </p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-folder-open"></i>
-                        <p>
-                            Category
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Categories")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-align-justify"></i>
-                        <p>
-                            Supplier
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Sup", "Suppliers")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Supplier</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-align-justify"></i>
+                        <i class="nav-icon fa fa-server"></i>
                         <p>
                             Product
                             <i class="right fas fa-angle-left"></i>
@@ -94,25 +60,69 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="@Url.Action("Index", "Categories")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>
+                            Transaction
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                       <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="@Url.Action("Index", "Imports")" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Import</p>
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Vendors")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Supplier</p>
+                            </a>
+                        </li>
+                    </ul>
+                 
                 </li>
-
-
-
                 <li class="nav-item">
-                    <a href="@Url.Action("Index", "Sales")" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
-                            POS
-                            <span class="right badge badge-danger">New</span>
+                            Report
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("SaleReport", "Reports")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sale</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("StockReport", "Reports")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Stock</p>
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
+
+
+
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

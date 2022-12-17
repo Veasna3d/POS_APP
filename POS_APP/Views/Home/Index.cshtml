@@ -1,82 +1,84 @@
-﻿@{
+﻿
     ViewBag.Title = "Home Page";
 }
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Summary</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Main</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
+
     <!-- /.content-header -->
     <!-- Main content -->
-    <div class="content">
+    <div class="content mt-4 pt-4">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="m-0">Week</h5>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>56</h3>
+                            <p>Total Product</p>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <h1>0</h1>
-                            </p>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
                         </div>
-                    </div><!-- /.card -->
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="m-0">Homework</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <h1>0</h1>
-                            </p>
-                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                <div class="col-lg-3">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="m-0">Quiz</h5>
+                            <p>Total Sale</p>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <h1>0</h1>
-                            </p>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
                         </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>44</h3>
 
-                <div class="col-lg-3">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="m-0">Assigment</h5>
+                            <p>Categories</p>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <h1>0</h1>
-                            </p>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
                         </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>65</h3>
 
+                            <p>Total Price</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="chartContainer" style="height: 350px; width: 100%;"></div>
+                </div>
+                <div class="col-lg-6">
+                    <div id="chartLegend" style="height: 350px; width: 100%;"></div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- /.content -->
@@ -91,3 +93,93 @@
     </div>
 </aside>
 <!-- /.control-sidebar -->
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //document loaded
+
+        $.ajax({
+            type: "Get",
+            url: "/Charts/RemainByQTY",
+            dataType: "json",
+            success: function (all_data) {
+                //[{ y: 300878, label: "Venezuela" }]
+                var dataPoints = [];
+                for (var i in all_data) {
+                    dataPoints.push({ y: all_data[i].SaleOut, label: all_data[i].PName });
+
+                }
+                console.log(dataPoints);
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "Top Trading"
+                    },
+
+                    data: [{
+                        type: "column",
+                        showInLegend: true,
+                        legendMarkerColor: "grey",
+
+                        dataPoints: dataPoints
+                    }]
+                });
+                chart.render();
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+
+        $.ajax({
+            type: "Get",
+            url: "/Charts/RemainByQTY",
+            dataType: "json",
+            success: function (all_data) {
+                var dataPoints = [];
+                for (var i in all_data) {
+                    dataPoints.push({ y: all_data[i].Remain, label: all_data[i].PName });
+                }
+                var chart = new CanvasJS.Chart("chartLegend", {
+                    animationEnabled: true,
+                    title: {
+                        text: "Stock Available"
+                    },
+                    data: [{
+                        type: "pie",
+                        startAngle: 240,
+                        yValueFormatString: "##0",
+                        indexLabel: "{label} {y}",
+                        dataPoints: dataPoints
+                    }]
+                });
+                chart.render();
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+        //Function findMax
+        function findMax(arr) {
+            var maxValue = Number.MIN_VALUE;
+            for (var i in arr) {
+                if (maxValue < arr[i].Number) { maxValue = arr[i].Number; }
+            }
+            return maxValue;
+        }
+        //Function findMin
+        function findMin(arr) {
+            var minValue = Number.MAX_VALUE;
+            for (var i in arr) {
+                if (minValue > arr[i].Number) { minValue = arr[i].Number; }
+            }
+            return minValue;
+        }
+
+        $("#reload").click(function () {
+            location.reload();
+        })
+    </script>
+}
